@@ -3,8 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: dorprize-management:latest
-    container_name: dorprize-management
+    image: doorprize-management:latest
+    container_name: doorprize-management
     env_file:
       - .env.local
     environment:

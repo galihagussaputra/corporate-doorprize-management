@@ -11,18 +11,55 @@ create extension if not exists pgcrypto with schema extensions;
 -- -----------------------------------------------------------------------------
 -- Demo administrator (local only)
 -- -----------------------------------------------------------------------------
+-- insert into auth.users (
+--   instance_id, id, aud, role, email, encrypted_password,
+--   email_confirmed_at, created_at, updated_at,
+--   raw_app_meta_data, raw_user_meta_data
+-- )
+-- values (
+--   '00000000-0000-0000-0000-000000000000',
+--   '11111111-1111-4111-8111-111111111111',
+--   'authenticated', 'authenticated', 'admin@doorprize.local',
+--   extensions.crypt('Admin123!', extensions.gen_salt('bf')),
+--   now(), now(), now(),
+--   '{"provider":"email","providers":["email"]}'::jsonb, '{}'::jsonb
+-- )
+-- on conflict (id) do nothing;
 insert into auth.users (
-  instance_id, id, aud, role, email, encrypted_password,
-  email_confirmed_at, created_at, updated_at,
-  raw_app_meta_data, raw_user_meta_data
+  instance_id,
+  id,
+  aud,
+  role,
+  email,
+  encrypted_password,
+  email_confirmed_at,
+  confirmation_token,
+  recovery_token,
+  email_change,
+  email_change_token_new,
+  is_super_admin,
+  created_at,
+  updated_at,
+  raw_app_meta_data,
+  raw_user_meta_data
 )
 values (
   '00000000-0000-0000-0000-000000000000',
   '11111111-1111-4111-8111-111111111111',
-  'authenticated', 'authenticated', 'admin@doorprize.local',
+  'authenticated',
+  'authenticated',
+  'admin@doorprize.local',
   extensions.crypt('Admin123!', extensions.gen_salt('bf')),
-  now(), now(), now(),
-  '{"provider":"email","providers":["email"]}'::jsonb, '{}'::jsonb
+  now(),
+  '',
+  '',
+  '',
+  '',
+  false,
+  now(),
+  now(),
+  '{"provider":"email","providers":["email"]}'::jsonb,
+  '{}'::jsonb
 )
 on conflict (id) do nothing;
 

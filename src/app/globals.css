@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface: #ffffff;
+  --surface-2: #f4f6f8;
+  --surface-3: #eef1f5;
+  --line: #dde3ea;
+  --line-strong: #c7d0dc;
+  --text: #101a29;
+  --text-muted: #5c6b7f;
+  --accent: #0d8b7d;
+  --accent-strong: #0a6f64;
+  --accent-soft: #e5f5f2;
+  --danger: #b42318;
+  --warning: #b54708;
+  --warning-soft: #fff7e6;
+}
+
+[data-theme="dark"] {
+  --surface: #111a27;
+  --surface-2: #0a111b;
+  --surface-3: #182434;
+  --line: #243347;
+  --line-strong: #354a63;
+  --text: #eaf0f7;
+  --text-muted: #93a4b9;
+  --accent: #2dd4bf;
+  --accent-strong: #14b8a6;
+  --accent-soft: #103a37;
+  --danger: #ff8a80;
+  --warning: #ffc46b;
+  --warning-soft: #3a2b14;
+}
+
+html, body { min-height: 100%; }
+body {
+  background: var(--surface-2);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  .panel-flat {
+    background: var(--surface);
+    border: 1px solid var(--line);
+  }
+  .field-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 7px;
+  }
+  .input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    color: var(--text);
+    border-radius: 7px;
+    padding: 9px 11px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+  .input:disabled { opacity: .55; cursor: not-allowed; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 7px;
+    padding: 9px 15px;
+    font-size: 13px;
+    font-weight: 650;
+    border: 1px solid transparent;
+    transition: background .15s, border-color .15s, transform .1s, opacity .15s;
+    white-space: nowrap;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn:disabled { opacity: .48; cursor: not-allowed; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover:not(:disabled) { background: var(--accent-strong); }
+  .btn-secondary { background: var(--surface); color: var(--text); border-color: var(--line-strong); }
+  .btn-secondary:hover:not(:disabled) { background: var(--surface-3); }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-danger:hover:not(:disabled) { filter: brightness(.94); }
+  .btn-ghost { background: transparent; color: var(--text-muted); }
+  .btn-ghost:hover:not(:disabled) { background: var(--surface-3); color: var(--text); }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 999px;
+    padding: 3px 9px;
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: .02em;
+    border: 1px solid var(--line);
+    color: var(--text-muted);
+  }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .data-table th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 700;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  .data-table td { padding: 11px 14px; border-bottom: 1px solid var(--line); }
+  .data-table tbody tr:hover { background: var(--surface-2); }
+  .section-title { font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
+  .stat-value { font-size: 30px; font-weight: 750; letter-spacing: -.04em; line-height: 1; }
+  .stat-label { font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* The stage is intentionally a separate visual system from the admin console. */
+.stage {
+  position: relative;
+  background: #050a12;
+  color: #f6f8fb;
+  overflow: hidden;
+}
+.stage-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at center, black 10%, transparent 78%);
+}
+.stage-glow {
+  background:
+    radial-gradient(circle at 20% 15%, rgba(20,184,166,.22), transparent 42%),
+    radial-gradient(circle at 82% 78%, rgba(230,183,92,.18), transparent 45%);
+}
+.gold-text {
+  background: linear-gradient(180deg, #fff3d6 10%, #e6b75c 62%, #b8862f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
